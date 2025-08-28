@@ -14,7 +14,8 @@ import {
   Code,
   Rocket,
   Globe,
-  Sparkles
+  Sparkles,
+  Mail
 } from 'lucide-react'
 
 // Custom Logo Component with actual image
@@ -30,6 +31,32 @@ const Logo = ({ className = "", size = 32 }) => {
         filter: 'drop-shadow(0 4px 8px rgba(220, 38, 38, 0.3))'
       }}
     />
+  )
+}
+
+// Glitch Text Component with 0x effect
+const GlitchText = ({ text, className = "" }) => {
+  const [glitchedText, setGlitchedText] = useState(text)
+  const [isGlitching, setIsGlitching] = useState(false)
+
+  useEffect(() => {
+    const glitchInterval = setInterval(() => {
+      setIsGlitching(true)
+      setGlitchedText(text.replace(/UA/g, '0x'))
+      
+      setTimeout(() => {
+        setGlitchedText(text)
+        setIsGlitching(false)
+      }, 150) // Glitch duration
+    }, 8000) // Glitch every 8 seconds
+
+    return () => clearInterval(glitchInterval)
+  }, [text])
+
+  return (
+    <span className={`glitch-text ${className} ${isGlitching ? 'glitching' : ''}`}>
+      {glitchedText}
+    </span>
   )
 }
 
@@ -84,6 +111,8 @@ const FloatingBlockchainLogos = () => {
   )
 }
 
+
+
 // Floating Particles Component
 const FloatingParticles = () => {
   return (
@@ -109,6 +138,129 @@ const FloatingParticles = () => {
           }}
         />
       ))}
+    </div>
+  )
+}
+
+// Coming Soon Counter Component with Stock Chart
+const ComingSoonCounter = () => {
+  return (
+    <div className="coming-soon-counter">
+      <motion.div
+        className="coming-soon-text"
+        initial={{ opacity: 0.5 }}
+        animate={{ opacity: [0.5, 1, 0.5] }}
+        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+      >
+        Soon...
+      </motion.div>
+      
+             {/* Mini PUMP Chart Animation */}
+       <div className="stock-chart-container">
+         <svg className="stock-chart" viewBox="0 0 100 40" preserveAspectRatio="none">
+           {/* Main PUMP line - aggressive upward movement */}
+           <motion.path
+             d="M0,35 L15,30 L25,25 L35,15 L45,8 L55,5 L65,3 L75,2 L85,1 L100,0"
+             stroke="#00ff00"
+             strokeWidth="3"
+             fill="none"
+             initial={{ pathLength: 0 }}
+             animate={{ pathLength: 1 }}
+             transition={{ duration: 1.5, repeat: Infinity, ease: "easeOut" }}
+           />
+           
+           {/* Secondary PUMP line for extra energy */}
+           <motion.path
+             d="M0,38 L20,32 L40,20 L60,8 L80,2 L100,0"
+             stroke="#00ff88"
+             strokeWidth="1.5"
+             fill="none"
+             initial={{ pathLength: 0 }}
+             animate={{ pathLength: 1 }}
+             transition={{ duration: 1.5, repeat: Infinity, ease: "easeOut", delay: 0.3 }}
+           />
+           
+           {/* Explosive dots that burst at key points */}
+           <motion.circle
+             cx="25" cy="25" r="3"
+             fill="#00ff00"
+             initial={{ scale: 0, opacity: 0 }}
+             animate={{ 
+               scale: [0, 2, 1, 0],
+               opacity: [0, 1, 0.8, 0]
+             }}
+             transition={{ duration: 1.2, repeat: Infinity, delay: 0.5 }}
+           />
+           <motion.circle
+             cx="45" cy="8" r="3"
+             fill="#00ff88"
+             initial={{ scale: 0, opacity: 0 }}
+             animate={{ 
+               scale: [0, 2.5, 1, 0],
+               opacity: [0, 1, 0.9, 0]
+             }}
+             transition={{ duration: 1.2, repeat: Infinity, delay: 1 }}
+           />
+           <motion.circle
+             cx="65" cy="3" r="3"
+             fill="#00ff00"
+             initial={{ scale: 0, opacity: 0 }}
+             animate={{ 
+               scale: [0, 3, 1, 0],
+               opacity: [0, 1, 1, 0]
+             }}
+             transition={{ duration: 1.2, repeat: Infinity, delay: 1.5 }}
+           />
+           <motion.circle
+             cx="85" cy="1" r="3"
+             fill="#00ff88"
+             initial={{ scale: 0, opacity: 0 }}
+             animate={{ 
+               scale: [0, 3.5, 1, 0],
+               opacity: [0, 1, 1, 0]
+             }}
+             transition={{ duration: 1.2, repeat: Infinity, delay: 2 }}
+           />
+           
+           {/* Final explosion at the peak */}
+           <motion.circle
+             cx="100" cy="0" r="4"
+             fill="#00ff00"
+             initial={{ scale: 0, opacity: 0 }}
+             animate={{ 
+               scale: [0, 4, 1, 0],
+               opacity: [0, 1, 1, 0]
+             }}
+             transition={{ duration: 1.5, repeat: Infinity, delay: 2.5 }}
+           />
+         </svg>
+         
+         {/* Aggressive PUMP indicator */}
+         <motion.div
+           className="pump-indicator"
+           animate={{ 
+             y: [0, -8, 0],
+             scale: [1, 1.3, 1],
+             rotate: [0, -5, 5, 0]
+           }}
+           transition={{ 
+             duration: 0.6, 
+             repeat: Infinity, 
+             ease: "easeInOut" 
+           }}
+         >
+           🚀
+         </motion.div>
+       </div>
+      
+      <motion.div
+        className="coming-soon-subtitle"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: [0, 0.7, 0] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+      >
+        In the works
+      </motion.div>
     </div>
   )
 }
@@ -215,7 +367,7 @@ function App() {
         </div>
         <nav className="nav">
           <a href="#home" className="nav-link">Home</a>
-          <a href="#founder" className="nav-link">Founder</a>
+          <a href="#founder" className="nav-link">Leadership</a>
           <a href="#goals" className="nav-link">Goals</a>
           <a href="#interest" className="nav-link">Join Us</a>
         </nav>
@@ -235,7 +387,7 @@ function App() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            Welcome to <span className="gradient-text">UA Blockchain</span>
+            Welcome to <GlitchText text="UA Blockchain" className="gradient-text" />
           </motion.h1>
 
           <motion.p
@@ -253,41 +405,44 @@ function App() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
-            <motion.div
-              className="stat"
-              whileHover={{ scale: 1.1, y: -5 }}
-            >
-              <span className="stat-number">50+</span>
-              <span className="stat-label">Members</span>
-            </motion.div>
-            <motion.div
-              className="stat"
-              whileHover={{ scale: 1.1, y: -5 }}
-            >
-              <span className="stat-number">10+</span>
-              <span className="stat-label">Projects</span>
-            </motion.div>
-            <motion.div
-              className="stat"
-              whileHover={{ scale: 1.1, y: -5 }}
-            >
-              <span className="stat-number">5+</span>
-              <span className="stat-label">Partners</span>
-            </motion.div>
+                         <motion.div
+               className="stat"
+               whileHover={{ scale: 1.1, y: -5 }}
+             >
+               <ComingSoonCounter />
+               <span className="stat-label">Members</span>
+             </motion.div>
+             <motion.div
+               className="stat"
+               whileHover={{ scale: 1.1, y: -5 }}
+             >
+               <ComingSoonCounter />
+               <span className="stat-label">Projects</span>
+             </motion.div>
+             <motion.div
+               className="stat"
+               whileHover={{ scale: 1.1, y: -5 }}
+             >
+               <ComingSoonCounter />
+               <span className="stat-label">Partners</span>
+             </motion.div>
           </motion.div>
 
-          <motion.button
-            className="cta-button"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 1 }}
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Sparkles size={20} />
-            Join Our Community
-            <ArrowRight size={20} />
-          </motion.button>
+                     <motion.button
+             className="cta-button"
+             initial={{ opacity: 0, scale: 0.8 }}
+             animate={{ opacity: 1, scale: 1 }}
+             transition={{ duration: 0.8, delay: 1 }}
+             whileHover={{ scale: 1.05, y: -2 }}
+             whileTap={{ scale: 0.95 }}
+             onClick={() => document.getElementById('interest').scrollIntoView({ behavior: 'smooth' })}
+           >
+             <Sparkles size={20} />
+             Join Our Community
+             <ArrowRight size={20} />
+           </motion.button>
+
+
         </motion.div>
 
         <motion.div
@@ -363,8 +518,8 @@ function App() {
               { value: "100+", label: "Students Mentored" }
             ]}
             socials={[
-              { icon: Linkedin, url: "#" },
-              { icon: Mail, url: "#" }
+              { icon: Linkedin, url: "https://www.linkedin.com/in/george-tyler-gazzam/" },
+              { icon: Mail, url: "mailto:ggazzam@crimson.ua.edu" }
             ]}
           />
 
@@ -379,8 +534,8 @@ function App() {
               { value: "100+", label: "Students Mentored" }
             ]}
             socials={[
-              { icon: Linkedin, url: "#" },
-              { icon: Mail, url: "#" }
+              { icon: Linkedin, url: "https://www.linkedin.com/in/ryanmilsap/" },
+              { icon: Mail, url: "mailto:rmmilsap@crimson.ua.edu" }
             ]}
           />
 
@@ -395,8 +550,8 @@ function App() {
               { value: "100+", label: "Students Mentored" }
             ]}
             socials={[
-              { icon: Linkedin, url: "#" },
-              { icon: Mail, url: "#" }
+              { icon: Linkedin, url: "https://www.linkedin.com/in/james-hojel-6a461b251/" },
+              { icon: Mail, url: "mailto:jehojel@crimson.ua.edu" }
             ]}
           />
         </div>
@@ -423,21 +578,15 @@ function App() {
               color: "#dc2626"
             },
             {
-              icon: Zap,
-              title: "Innovation",
-              description: "Foster innovation through collaborative projects and cutting-edge blockchain research",
-              color: "#ef4444"
-            },
-            {
               icon: Users,
               title: "Community",
               description: "Build a strong, inclusive community of blockchain enthusiasts and developers",
-              color: "#fca5a5"
+              color: "#dc2626"
             },
             {
               icon: ExternalLink,
               title: "Partnerships",
-              description: "Establish partnerships with industry leaders and other blockchain organizations",
+              description: "Connect with industry leaders, host speaker events, and establish partnerships with blockchain organizations",
               color: "#dc2626"
             }
           ].map((goal, index) => (
@@ -488,54 +637,51 @@ function App() {
         </motion.p>
 
         <div className="interest-options">
-          {[
-            {
-              title: "Join Our Discord",
-              description: "Connect with fellow blockchain enthusiasts, ask questions, and stay updated on events",
-              icon: Users,
-              action: "Join Discord"
-            },
-            {
-              title: "Attend Events",
-              description: "Participate in workshops, hackathons, and networking events throughout the semester",
-              icon: Star,
-              action: "View Events"
-            },
-            {
-              title: "Start Building",
-              description: "Contribute to open-source projects or start your own blockchain application",
-              icon: Code,
-              action: "Browse Projects"
-            }
-          ].map((option, index) => (
-            <motion.div
-              key={index}
-              className="interest-card"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -10, scale: 1.02 }}
-            >
+          <motion.div
+            className="interest-card combined-card"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            whileHover={{ y: -10, scale: 1.02 }}
+          >
+            <div className="combined-icons">
               <motion.div
                 className="interest-icon"
                 whileHover={{ rotate: 360, scale: 1.2 }}
                 transition={{ duration: 0.6 }}
               >
-                <option.icon size={32} />
+                <Users size={32} />
               </motion.div>
-              <h3>{option.title}</h3>
-              <p>{option.description}</p>
-              <motion.button
-                className="interest-button"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
+              <motion.div
+                className="interest-icon"
+                whileHover={{ rotate: 360, scale: 1.2 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
               >
-                {option.action}
-                <ArrowRight size={16} />
-              </motion.button>
-            </motion.div>
-          ))}
+                <Star size={32} />
+              </motion.div>
+              <motion.div
+                className="interest-icon"
+                whileHover={{ rotate: 360, scale: 1.2 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                <Code size={32} />
+              </motion.div>
+            </div>
+            <h3>Get Involved with UA Blockchain</h3>
+            <p>Connect with fellow blockchain enthusiasts, attend workshops and hackathons, and contribute to open-source projects. Join our community to start building the future of decentralized technology.</p>
+            <motion.a
+              href="https://groupme.com/join_group/109054103/ZP6lx6pQ"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="interest-button"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Join Our Group
+              <ArrowRight size={16} />
+            </motion.a>
+          </motion.div>
         </div>
       </section>
 
@@ -560,6 +706,7 @@ function App() {
             />
           </div>
           <p>&copy; 2024 UA Blockchain. Building the future, one block at a time. Roll Tide! 🐘</p>
+          <p>Contact: <a href="mailto:blockchainatua@gmail.com" className="footer-email">blockchainatua@gmail.com</a></p>
         </div>
       </motion.footer>
     </div>

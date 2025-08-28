@@ -168,6 +168,28 @@ body {
   color: #ffffff;
 }
 
+.glitch-text {
+  position: relative;
+  transition: all 0.1s ease;
+}
+
+.glitch-text.glitching {
+  animation: glitch 0.15s ease-in-out;
+  text-shadow: 
+    2px 0 #dc2626,
+    -2px 0 #00ff00,
+    0 2px #0000ff;
+}
+
+@keyframes glitch {
+  0% { transform: translate(0) }
+  20% { transform: translate(-2px, 2px) }
+  40% { transform: translate(-2px, -2px) }
+  60% { transform: translate(2px, 2px) }
+  80% { transform: translate(2px, -2px) }
+  100% { transform: translate(0) }
+}
+
 .logo-icon {
   animation: pulse 2s ease-in-out infinite;
   filter: drop-shadow(0 4px 8px rgba(220, 38, 38, 0.3));
@@ -296,6 +318,85 @@ body {
   border-radius: 12px;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 200px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.blockchain-stat {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(220, 38, 38, 0.1));
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  position: relative;
+  overflow: hidden;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.blockchain-stat::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(220, 38, 38, 0.2), transparent);
+  animation: blockchain-scan 3s linear infinite;
+}
+
+@keyframes blockchain-scan {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+.blockchain-counter {
+  position: relative;
+  z-index: 2;
+}
+
+.tx-value {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #dc2626;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 20px rgba(220, 38, 38, 0.5);
+  font-family: 'Courier New', monospace;
+}
+
+.tx-details {
+  font-size: 0.7rem;
+  color: #a0a0a0;
+  font-family: 'Courier New', monospace;
+  text-align: left;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 6px;
+  border: 1px solid rgba(220, 38, 38, 0.2);
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.tx-hash {
+  color: #00ff00;
+  margin-bottom: 0.2rem;
+  font-weight: 600;
+}
+
+.gas-price {
+  color: #ffff00;
+  margin-bottom: 0.2rem;
+  font-weight: 600;
+}
+
+.block-num {
+  color: #00ffff;
+  font-weight: 600;
 }
 
 .stat-number {
@@ -305,6 +406,65 @@ body {
   color: #dc2626;
   margin-bottom: 0.5rem;
   text-shadow: 0 0 20px rgba(220, 38, 38, 0.5);
+}
+
+.coming-soon-counter {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 1rem;
+}
+
+.coming-soon-text {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #dc2626;
+  text-shadow: 0 0 20px rgba(220, 38, 38, 0.5);
+  font-family: 'Inter', sans-serif;
+}
+
+.coming-soon-subtitle {
+  font-size: 1rem;
+  color: #a0a0a0;
+  font-weight: 500;
+  opacity: 0.7;
+}
+
+.stock-chart-container {
+  position: relative;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.stock-chart {
+  width: 80px;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
+  border: 2px solid rgba(0, 255, 0, 0.6);
+  padding: 4px;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+}
+
+.pump-indicator {
+  font-size: 1.4rem;
+  animation: aggressive-glow 1s ease-in-out infinite;
+}
+
+@keyframes aggressive-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 8px rgba(0, 255, 0, 0.8)) drop-shadow(0 0 15px rgba(0, 255, 136, 0.6));
+  }
+  50% {
+    filter: drop-shadow(0 0 20px rgba(0, 255, 0, 1)) drop-shadow(0 0 30px rgba(0, 255, 136, 0.8));
+  }
 }
 
 .stat-label {
@@ -350,6 +510,80 @@ body {
 .cta-button:hover {
   transform: translateY(-2px);
   box-shadow: 0 12px 40px rgba(220, 38, 38, 0.4);
+}
+
+.hero-blockchain-feed {
+  margin-top: 2rem;
+  max-width: 500px;
+}
+
+.live-blockchain-feed {
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(220, 38, 38, 0.5);
+  border-radius: 12px;
+  padding: 1rem;
+  font-family: 'Courier New', monospace;
+  backdrop-filter: blur(10px);
+}
+
+.feed-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(220, 38, 38, 0.3);
+}
+
+.feed-title {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.feed-status {
+  color: #00ff00;
+  font-size: 0.8rem;
+  animation: pulse 1s ease-in-out infinite;
+}
+
+.feed-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.feed-transaction {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background: rgba(220, 38, 38, 0.1);
+  border-radius: 6px;
+  border: 1px solid rgba(220, 38, 38, 0.2);
+  font-size: 0.7rem;
+}
+
+.tx-type {
+  color: #ffff00;
+  font-weight: 600;
+}
+
+.tx-amount {
+  color: #00ff00;
+  font-weight: 600;
+}
+
+.tx-gas {
+  color: #00ffff;
+  font-weight: 600;
+}
+
+.tx-hash {
+  color: #ff00ff;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Hero Visual */
@@ -726,11 +960,22 @@ section {
 
 /* Interest Section */
 .interest-options {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
+  display: flex;
+  justify-content: center;
   max-width: 1000px;
   margin: 0 auto;
+}
+
+.combined-card {
+  max-width: 600px;
+  text-align: center;
+}
+
+.combined-icons {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .interest-card {
@@ -873,6 +1118,17 @@ section {
   filter: drop-shadow(0 4px 12px rgba(220, 38, 38, 0.4)) !important;
 }
 
+.footer-email {
+  color: #dc2626;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.footer-email:hover {
+  color: #ef4444;
+  text-decoration: underline;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .header {
@@ -942,3 +1198,4 @@ section {
     padding: 0.4rem 0.8rem;
   }
 }
+
