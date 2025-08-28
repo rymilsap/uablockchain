@@ -1201,12 +1201,24 @@ section {
 
 /* Enhanced Mobile Responsiveness */
 @media (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+  
+  .app {
+    overflow-x: hidden;
+    width: 100%;
+  }
+  
   .header {
     display: none;
   }
   
   .hero-section {
     padding-top: 2rem;
+    overflow-x: hidden;
+    width: 100%;
   }
   
   .hero-section {
@@ -1218,6 +1230,7 @@ section {
     width: 100%;
     max-width: 300px;
     margin: 0 auto;
+    overflow: hidden;
   }
   
   .hero-logo img {
@@ -1228,16 +1241,20 @@ section {
   
   .hero-stats {
     flex-direction: row;
-    gap: 0.75rem;
+    gap: 0.5rem;
     width: 100%;
-    max-width: 400px;
+    max-width: 100%;
     margin: 0 auto 2rem;
+    padding: 0 1rem;
+    box-sizing: border-box;
   }
   
   .stat {
     min-height: 60px;
     flex: 1;
     padding: 0.5rem;
+    max-width: calc(33.33% - 0.33rem);
+    box-sizing: border-box;
   }
   
   .founder-container {
@@ -1247,6 +1264,8 @@ section {
     justify-content: center;
     width: 100%;
     padding: 0 1rem;
+    box-sizing: border-box;
+    overflow: hidden;
   }
   
   .profile-card {
@@ -1254,6 +1273,7 @@ section {
     max-width: 280px;
     padding: 1.5rem;
     margin: 0 auto;
+    box-sizing: border-box;
   }
   
   .profile-avatar {
@@ -1273,10 +1293,14 @@ section {
   
   .goals-grid {
     gap: 1rem;
+    padding: 0 1rem;
+    box-sizing: border-box;
+    width: 100%;
   }
   
   .goal-card {
     padding: 1.5rem 1rem;
+    box-sizing: border-box;
   }
   
   .goal-icon {
@@ -1290,8 +1314,10 @@ section {
   }
   
   .combined-card {
-    margin: 0 0.5rem;
+    margin: 0 1rem;
     padding: 1.5rem 1rem;
+    box-sizing: border-box;
+    width: calc(100% - 2rem);
   }
   
   .combined-icons {
@@ -1310,6 +1336,18 @@ section {
 }
 
 @media (max-width: 480px) {
+  body {
+    overflow-x: hidden;
+    width: 100vw;
+    max-width: 100vw;
+  }
+  
+  .app {
+    overflow-x: hidden;
+    width: 100vw;
+    max-width: 100vw;
+  }
+  
   .header {
     padding: 0.5rem;
     gap: 0.25rem;
