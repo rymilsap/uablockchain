@@ -1235,8 +1235,9 @@ section {
   }
   
   .stat {
-    min-height: 80px;
+    min-height: 60px;
     flex: 1;
+    padding: 0.5rem;
   }
   
   .founder-container {
@@ -1245,6 +1246,7 @@ section {
     gap: 1.5rem;
     justify-content: center;
     width: 100%;
+    padding: 0 1rem;
   }
   
   .profile-card {
@@ -1348,8 +1350,8 @@ section {
   }
   
   .stat {
-    min-height: 70px;
-    padding: 0.75rem;
+    min-height: 50px;
+    padding: 0.5rem;
   }
   
   .cta-button {
@@ -1359,6 +1361,8 @@ section {
     min-width: 200px;
     margin: 2rem auto 0;
     display: block;
+    text-decoration: none;
+    cursor: pointer;
   }
   
   .cta-button svg {
